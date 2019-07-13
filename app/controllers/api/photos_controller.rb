@@ -20,6 +20,22 @@ class Api::PhotosController < ApplicationController
     the_id = params[:id]
     @photo = Photo.find_by(id: the_id)
     render "show.json.jb"
-    
+  end
+
+  def update
+    the_id = params[:id]
+    @photo = Photo.find_by(id: the_id)
+    @photo.name = params[:input_name]
+    @photo.width = params[:input_width]
+    @photo.height = params[:input_height]
+    @photo.save
+    render "update.json.jb"
+  end
+
+  def destroy
+    the_id = params[:id]
+    photo = Photo.find_by(id: the_id)
+    photo.destroy
+    render "destroy.json.jb" 
   end
 end
